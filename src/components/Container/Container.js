@@ -1,6 +1,9 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import { usersReducer } from '../../reducers/usersReducer.js';
 import axios from 'axios';
+import { StyledContainer } from './styles.js';
+import SearchContainer from '../SearchContainer/SearchContainer.js';
+import ListContainer from '../ListContainer/ListContainer.js';
 
 const API_ENDPOINT = 'https://randomuser.me/api/?results=20';
 
@@ -28,7 +31,17 @@ const Container = () => {
     fetchUSerData();
   }, []);
 
-  return <div>Container</div>;
+  return (
+    <StyledContainer>
+      <div>Container</div>
+      <SearchContainer />
+      <ListContainer
+        users={users.data}
+        isLoading={users.isLoading}
+        isError={users.isError}
+      />
+    </StyledContainer>
+  );
 };
 
 export default Container;
