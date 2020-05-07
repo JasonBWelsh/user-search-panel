@@ -2,7 +2,15 @@ import React from 'react';
 import { StyledUser } from './styles.js';
 import { ReactComponent as CrossIcon } from '../../icons/cross.svg';
 
-const User = ({ firstName, lastName, email, cell, image }) => {
+const User = ({
+  firstName,
+  lastName,
+  email,
+  cell,
+  image,
+  handleAddRecentUser,
+  id,
+}) => {
   return (
     <StyledUser>
       <div className="user-image__container">
@@ -17,7 +25,11 @@ const User = ({ firstName, lastName, email, cell, image }) => {
         <span>{cell}</span>
         <span>{email}</span>
       </div>
-      <button className="user-add__button">
+      <button
+        className="user-add__button"
+        type="button"
+        onClick={() => handleAddRecentUser(id)}
+      >
         <CrossIcon height="20px" width="20px" />
       </button>
     </StyledUser>

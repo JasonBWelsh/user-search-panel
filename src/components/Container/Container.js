@@ -9,11 +9,14 @@ const API_ENDPOINT = 'https://randomuser.me/api/?results=20';
 
 const Container = () => {
   const [searchTerm, setSearchTerm] = useState('');
+
   const [users, dispatchUsers] = useReducer(usersReducer, {
     data: [],
     isLoading: false,
     isError: false,
   });
+
+  const [recentUsers, setRecentUsers] = useState([]);
 
   useEffect(() => {
     dispatchUsers({ type: 'FETCH_USERS_INIT' });
@@ -41,12 +44,31 @@ const Container = () => {
     event.preventDefault();
   };
 
+  const handleClearRecentSearches = () => {
+    console.log('handleClearRecentSearches');
+  };
+
+  const handleAddRecentUser = (id) => {
+    console.log('DRD-A - `handleAddRecentUser`', id);
+    const selectedUser = users.data.filter((user) => user.login.salt === id);
+    const trimmedRecentUsersList = [...recentUsers];
+    console.log('DRD-A - `trimmedRecentUsersList`:::', trimmedRecentUsersList);
+    if (trimmedRecentUsersList.length === 5) {
+      trimmedRecentUsersList.shift();
+      setRecentUsers([...trimmedRecentUsersList, selectedUser[0]]);
+    } else {
+      setRecentUsers([...trimmedRecentUsersList, selectedUser[0]]);
+    }
+  };
+
   return (
     <StyledContainer>
       <SearchContainer
         searchTerm={searchTerm}
         handleSearchChange={handleSearchChange}
         handleSubmit={handleSubmit}
+        recentUsers={recentUsers}
+        handleClearRecentSearches={handleClearRecentSearches}
       />
       <ListContainer
         users={users.data.filter(
@@ -56,6 +78,7 @@ const Container = () => {
         )}
         isLoading={users.isLoading}
         isError={users.isError}
+        handleAddRecentUser={handleAddRecentUser}
       />
     </StyledContainer>
   );

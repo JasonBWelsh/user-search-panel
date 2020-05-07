@@ -52,6 +52,7 @@ export const StyledUser = styled.div`
     position: absolute;
     top: 5px;
     right: 5px;
+    cursor: pointer;
 
     svg path {
       fill: #ccc;
