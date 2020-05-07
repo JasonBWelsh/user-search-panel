@@ -45,19 +45,26 @@ const Container = () => {
   };
 
   const handleClearRecentSearches = () => {
-    console.log('handleClearRecentSearches');
+    setRecentUsers([]);
   };
 
   const handleAddRecentUser = (id) => {
-    console.log('DRD-A - `handleAddRecentUser`', id);
-    const selectedUser = users.data.filter((user) => user.login.salt === id);
+    const selectedUser = users.data.filter((user) => user.login.salt === id)[0];
     const trimmedRecentUsersList = [...recentUsers];
-    console.log('DRD-A - `trimmedRecentUsersList`:::', trimmedRecentUsersList);
-    if (trimmedRecentUsersList.length === 5) {
+
+    let isPresent = false;
+
+    trimmedRecentUsersList.forEach((user) => {
+      if (user.login.salt === selectedUser.login.salt) {
+        isPresent = true;
+      }
+    });
+
+    if (trimmedRecentUsersList.length === 5 && !isPresent) {
       trimmedRecentUsersList.shift();
-      setRecentUsers([...trimmedRecentUsersList, selectedUser[0]]);
-    } else {
-      setRecentUsers([...trimmedRecentUsersList, selectedUser[0]]);
+      setRecentUsers([...trimmedRecentUsersList, selectedUser]);
+    } else if (!isPresent) {
+      setRecentUsers([...trimmedRecentUsersList, selectedUser]);
     }
   };
 
