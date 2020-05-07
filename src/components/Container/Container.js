@@ -8,6 +8,7 @@ import ListContainer from '../ListContainer/ListContainer.js';
 const API_ENDPOINT = 'https://randomuser.me/api/?results=20';
 
 const Container = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [users, dispatchUsers] = useReducer(usersReducer, {
     data: [],
     isLoading: false,
@@ -31,12 +32,28 @@ const Container = () => {
     fetchUSerData();
   }, []);
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    console.log('handleSearch', event.target.value, searchTerm);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <StyledContainer>
-      <div>Container</div>
-      <SearchContainer />
+      <SearchContainer
+        searchTerm={searchTerm}
+        handleSearchChange={handleSearchChange}
+        handleSubmit={handleSubmit}
+      />
       <ListContainer
-        users={users.data}
+        users={users.data.filter(
+          (user) =>
+            user.name.first.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.name.last.toLowerCase().includes(searchTerm.toLowerCase())
+        )}
         isLoading={users.isLoading}
         isError={users.isError}
       />

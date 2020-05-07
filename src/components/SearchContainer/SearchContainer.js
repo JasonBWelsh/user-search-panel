@@ -1,10 +1,15 @@
 import React from 'react';
 import { StyledSearchContainer } from './styles.js';
+import SearchForm from '../SearchForm/SearchForm.js';
 
-const SearchContainer = () => {
+const SearchContainer = ({ searchTerm, handleSearchChange, handleSubmit }) => {
   return (
     <StyledSearchContainer>
-      <div>Search Container</div>
+      <SearchForm
+        searchTerm={searchTerm}
+        handleSearchChange={handleSearchChange}
+        handleSubmit={handleSubmit}
+      />
     </StyledSearchContainer>
   );
 };
