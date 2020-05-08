@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledSearchForm = styled.form`
-  border: 1px dotted #eee;
   display: flex;
   flex-direction: column;
 
