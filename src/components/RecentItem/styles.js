@@ -3,12 +3,18 @@ import styled from 'styled-components';
 export const StyledRecentItem = styled.div`
   margin-right: 5px;
   margin-bottom: 5px;
-  border: 1px dotted black;
+  background: #769976;
   color: #fff;
   border-radius: 3px;
-  padding: 10px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  &.recent-item__0 {
-    border: 1px solid tomato;
+  button {
+    margin: 0;
+    border: none;
+    background: transparent;
+    color: #fff;
   }
 `;

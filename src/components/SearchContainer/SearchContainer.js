@@ -9,6 +9,8 @@ const SearchContainer = ({
   handleSubmit,
   recentUsers,
   handleClearRecentSearches,
+  handleRecentUserClick,
+  handleRecentUsersDelete,
 }) => {
   return (
     <StyledSearchContainer>
@@ -20,6 +22,8 @@ const SearchContainer = ({
       <RecentItemsContainer
         recentUsers={recentUsers}
         handleClearRecentSearches={handleClearRecentSearches}
+        handleRecentUserClick={handleRecentUserClick}
+        handleRecentUsersDelete={handleRecentUsersDelete}
       />
     </StyledSearchContainer>
   );

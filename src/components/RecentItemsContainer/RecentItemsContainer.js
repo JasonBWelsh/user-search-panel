@@ -2,7 +2,12 @@ import React from 'react';
 import { StyledRecentItemsContainer } from './styles.js';
 import RecentItem from '../RecentItem/RecentItem.js';
 
-const RecentItemsContainer = ({ recentUsers, handleClearRecentSearches }) => {
+const RecentItemsContainer = ({
+  recentUsers,
+  handleClearRecentSearches,
+  handleRecentUserClick,
+  handleRecentUsersDelete,
+}) => {
   return (
     <StyledRecentItemsContainer>
       <button
@@ -21,6 +26,8 @@ const RecentItemsContainer = ({ recentUsers, handleClearRecentSearches }) => {
           firstName={user.name.first}
           lastName={user.name.last}
           className={`recent-item__${index.toString()}`}
+          handleRecentUserClick={handleRecentUserClick}
+          handleRecentUsersDelete={handleRecentUsersDelete}
         />
       ))}
     </StyledRecentItemsContainer>

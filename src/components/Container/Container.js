@@ -40,6 +40,21 @@ const Container = () => {
     console.log('handleSearch', event.target.value, searchTerm);
   };
 
+  const handleRecentUserClick = (userName) => {
+    // get user name
+    // set searchTerm so list is filtered by selected name
+    console.log('DRD-13 `handleRecentUserClick` log `userName`', userName);
+    setSearchTerm(userName);
+  };
+
+  const handleRecentUsersDelete = (id) => {
+    // get id of clicked user
+    // filter setRecentUSers removing user with id
+    // clear search bar
+    console.log('DRD-13 `handleREcentUSersDelete` log `id`:::', id);
+    setRecentUsers(recentUsers.filter((user) => user.login.salt !== id)); // user.login.salt used for unique ID throughout app
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -76,6 +91,8 @@ const Container = () => {
         handleSubmit={handleSubmit}
         recentUsers={recentUsers}
         handleClearRecentSearches={handleClearRecentSearches}
+        handleRecentUserClick={handleRecentUserClick}
+        handleRecentUsersDelete={handleRecentUsersDelete}
       />
       <ListContainer
         users={users.data.filter(
